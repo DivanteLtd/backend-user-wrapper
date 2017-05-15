@@ -1,9 +1,24 @@
 {
-    "name": "Divante/UserPermissions",
+    "name": "divante-ltd/UserPermissions",
+    "description": "Extended User Permissions plugin for Pimcore",
     "type": "pimcore-plugin",
+    "license": "GPL-3.0+",
     "require": {
-        "pimcore/installer-plugin": ">=1"
+        "pimcore/installer-plugin": ">=1",
+        "pimcore/core-version": ">=4"
     },
+    "authors": [
+        {
+            "name": "DivanteLtd",
+            "email":  "pimcore@divante.pl",
+            "homepage": "http://divante.co"
+        },
+        {
+            "name": "Jakub Płaskonka",
+            "email":  "jplaskonka@divante.pl",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "UserPermissions\\": "lib"
