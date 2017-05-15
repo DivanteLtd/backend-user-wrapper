@@ -1,5 +1,5 @@
 {
-    "name": "divante-ltd/UserPermissions",
+    "name": "divante-ltd/user-permissions",
     "description": "Extended User Permissions plugin for Pimcore",
     "type": "pimcore-plugin",
     "license": "GPL-3.0+",
