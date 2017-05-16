@@ -4,6 +4,7 @@ namespace UserPermissions;
 
 use Pimcore\API\Plugin as PluginLib;
 use Pimcore\Model\Object\ClassDefinition\Service;
+use Pimcore\Model\User\Role;
 use UserPermissions\Helper\Config;
 use UserPermissions\User\Manager;
 
@@ -48,15 +49,43 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
         $config = $configHelper->getConfig();
 
         $class = \Pimcore\Model\Object\ClassDefinition::getByName($config->className);
+
         if (!$class) {
             $class = \Pimcore\Model\Object\ClassDefinition::create(array(
                 "name" => $config->className
             ));
+
             $classFile = file_get_contents(PIMCORE_PLUGINS_PATH . "/UserPermissions/user.json");
+            $rolesString = self::getRolesString();
+            $classFile = str_replace("<<ROLESSTRING>>", $rolesString, $classFile);
             Service::importClassDefinitionFromJson($class, $classFile);
         }
 
         return true;
+    }
+
+    /**
+     * @return string
+     */
+    protected static function getRolesString()
+    {
+
+        $list = new \Pimcore\Model\User\Role\Listing();
+        $list->setCondition("`type` = ?", ["role"]);
+        $list->load();
+
+        $roles = [];
+        if (is_array($list->getItems())) {
+            foreach ($list->getItems() as $item) {
+                $role = new \stdClass();
+                $role->key = $item->getName();
+                $role->value = $item->getName();
+                $roles[] = $role;
+            }
+        }
+
+        return json_encode($roles);
+
     }
 
     /**

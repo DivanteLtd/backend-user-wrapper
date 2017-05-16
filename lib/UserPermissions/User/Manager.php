@@ -48,6 +48,8 @@ class Manager
         ]);
 
         $userObject->setUser($user->getId());
+        $userObject->save();
+        self::updateUser($userObject, $user);
     }
 
     /**
@@ -63,6 +65,23 @@ class Manager
         }
 
         $user->setActive($active);
+
+        $user->setName($userObject->getUsername());
+        $user->setPassword($userObject->getPassword());
+        $user->setEmail($userObject->getEmail());
+        $user->setFirstname($userObject->getFirstname());
+        $user->setLastname($userObject->getLastname());
+
+        $roles = $userObject->getUserRoles();
+
+        $rolesArray = [];
+
+        foreach ($roles as $rule) {
+            $rolesArray[] = User\Role::getByName($rule)->getId();
+        }
+
+        $user->setRoles($rolesArray);
+
         $user->save();
     }
 }

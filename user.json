@@ -62,7 +62,7 @@
 								"name":"username",
 								"title":"Username",
 								"tooltip":"",
-								"mandatory":false,
+								"mandatory":true,
 								"noteditable":false,
 								"index":false,
 								"locked":false,
@@ -80,7 +80,7 @@
 								"queryColumnType":"varchar(190)",
 								"columnType":"varchar(190)",
 								"phpdocType":"string",
-								"algorithm":"md5",
+								"algorithm":"password_hash",
 								"salt":"",
 								"saltlocation":"back",
 								"name":"password",
@@ -169,20 +169,7 @@
 							},
 							{
 								"fieldtype":"user",
-								"options":[
-									{
-										"value":"2",
-										"key":"admin"
-									},
-									{
-										"value":"6",
-										"key":"alex"
-									},
-									{
-										"value":"3",
-										"key":"etim_acceptance_manager"
-									}
-								],
+								"options":null,
 								"width":"",
 								"defaultValue":null,
 								"queryColumnType":"varchar(190)",
@@ -223,6 +210,49 @@
 						"permissions":null,
 						"childs":[
 
+						],
+						"locked":false
+					},
+					{
+						"fieldtype":"panel",
+						"labelWidth":100,
+						"layout":null,
+						"name":"Layout",
+						"type":null,
+						"region":null,
+						"title":"Roles",
+						"width":null,
+						"height":null,
+						"collapsible":false,
+						"collapsed":false,
+						"bodyStyle":"",
+						"datatype":"layout",
+						"permissions":null,
+						"childs":[
+							{
+								"fieldtype":"multiselect",
+								"options":<<ROLESSTRING>>,
+								"width":"",
+								"height":"",
+								"maxItems":"",
+								"queryColumnType":"text",
+								"columnType":"text",
+								"phpdocType":"array",
+								"name":"userRoles",
+								"title":"User Roles",
+								"tooltip":"",
+								"mandatory":false,
+								"noteditable":false,
+								"index":false,
+								"locked":false,
+								"style":"",
+								"permissions":null,
+								"datatype":"data",
+								"relationType":false,
+								"invisible":false,
+								"visibleGridView":false,
+								"visibleSearch":false
+							}
 						],
 						"locked":false
 					}
