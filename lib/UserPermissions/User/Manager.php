@@ -75,7 +75,7 @@ class Manager
         $roles = $userObject->getUserRoles();
 
         $rolesArray = [];
-        if(is_array($roles)) {
+        if (is_array($roles)) {
             foreach ($roles as $rule) {
                 $rolesArray[] = User\Role::getByName($rule)->getId();
             }

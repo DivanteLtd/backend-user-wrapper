@@ -93,7 +93,6 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
             $class->delete();
             return true;
         }
-
     }
 
     /**

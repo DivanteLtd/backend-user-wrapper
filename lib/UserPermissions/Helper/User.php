@@ -8,7 +8,11 @@
 
 namespace UserPermissions\Helper;
 
-
+/**
+ * Class User
+ * Helper providing User model functions
+ * @package UserPermissions\Helper
+ */
 class User
 {
     /**
@@ -17,7 +21,6 @@ class User
      */
     public static function getRolesString()
     {
-
         $list = new \Pimcore\Model\User\Role\Listing();
         $list->setCondition("`type` = ?", ["role"]);
         $list->load();
@@ -33,6 +36,5 @@ class User
         }
 
         return json_encode($roles);
-
     }
 }
