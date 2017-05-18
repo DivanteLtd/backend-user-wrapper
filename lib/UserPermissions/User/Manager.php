@@ -75,13 +75,24 @@ class Manager
         $roles = $userObject->getUserRoles();
 
         $rolesArray = [];
-
-        foreach ($roles as $rule) {
-            $rolesArray[] = User\Role::getByName($rule)->getId();
+        if(is_array($roles)) {
+            foreach ($roles as $rule) {
+                $rolesArray[] = User\Role::getByName($rule)->getId();
+            }
         }
 
         $user->setRoles($rolesArray);
 
         $user->save();
+    }
+
+    /**
+     * @param \Pimcore\Model\Object\User $userObject
+     * @param \Pimcore\Model\User $user
+     */
+    public static function deleteUser($userObject)
+    {
+        $user = User::getByName($userObject->getUsername());
+        $user->delete();
     }
 }

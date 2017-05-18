@@ -6,6 +6,7 @@ use Pimcore\API\Plugin as PluginLib;
 use Pimcore\Model\Object\ClassDefinition\Service;
 use Pimcore\Model\User\Role;
 use UserPermissions\Helper\Config;
+use UserPermissions\Helper\User;
 use UserPermissions\User\Manager;
 
 /**
@@ -21,6 +22,7 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
     {
         parent::init();
         \Pimcore::getEventManager()->attach("object.postUpdate", [$this, "handleObject"]);
+        \Pimcore::getEventManager()->attach("object.postDelete", [$this, "deleteObject"]);
     }
 
     /**
@@ -32,6 +34,18 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
         $configHelper = new \UserPermissions\Helper\Config();
         if ($object->getClassName() == $configHelper->getConfig()->className) {
             Manager::processUser($object);
+        }
+    }
+
+    /**
+     * @param Event $event
+     */
+    public function deleteObject($event)
+    {
+        $object = $event->getTarget();
+        $configHelper = new \UserPermissions\Helper\Config();
+        if ($object->getClassName() == $configHelper->getConfig()->className) {
+            Manager::deleteUser($object);
         }
     }
 
@@ -56,7 +70,7 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
             ));
 
             $classFile = file_get_contents(PIMCORE_PLUGINS_PATH . "/UserPermissions/user.json");
-            $rolesString = self::getRolesString();
+            $rolesString = User::getRolesString();
             $classFile = str_replace("<<ROLESSTRING>>", $rolesString, $classFile);
             Service::importClassDefinitionFromJson($class, $classFile);
         }
@@ -65,36 +79,21 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
     }
 
     /**
-     * @return string
-     */
-    protected static function getRolesString()
-    {
-
-        $list = new \Pimcore\Model\User\Role\Listing();
-        $list->setCondition("`type` = ?", ["role"]);
-        $list->load();
-
-        $roles = [];
-        if (is_array($list->getItems())) {
-            foreach ($list->getItems() as $item) {
-                $role = new \stdClass();
-                $role->key = $item->getName();
-                $role->value = $item->getName();
-                $roles[] = $role;
-            }
-        }
-
-        return json_encode($roles);
-
-    }
-
-    /**
      * @return bool
      */
     public static function uninstall()
     {
-        // TODO implement
-        return true;
+        $configHelper = new Config();
+        $config = $configHelper->getConfig();
+
+        $class = \Pimcore\Model\Object\ClassDefinition::getByName($config->className);
+        if (!$class) {
+            return false;
+        } else {
+            $class->delete();
+            return true;
+        }
+
     }
 
     /**

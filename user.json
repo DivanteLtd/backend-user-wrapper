@@ -75,30 +75,6 @@
 								"visibleSearch":false
 							},
 							{
-								"fieldtype":"password",
-								"width":"",
-								"queryColumnType":"varchar(190)",
-								"columnType":"varchar(190)",
-								"phpdocType":"string",
-								"algorithm":"password_hash",
-								"salt":"",
-								"saltlocation":"back",
-								"name":"password",
-								"title":"Password",
-								"tooltip":"",
-								"mandatory":false,
-								"noteditable":false,
-								"index":false,
-								"locked":false,
-								"style":"",
-								"permissions":null,
-								"datatype":"data",
-								"relationType":false,
-								"invisible":false,
-								"visibleGridView":false,
-								"visibleSearch":false
-							},
-							{
 								"fieldtype":"firstname",
 								"width":null,
 								"queryColumnType":"varchar",
@@ -190,26 +166,6 @@
 								"visibleGridView":false,
 								"visibleSearch":false
 							}
-						],
-						"locked":false
-					},
-					{
-						"fieldtype":"panel",
-						"labelWidth":100,
-						"layout":null,
-						"name":"Layout",
-						"type":null,
-						"region":null,
-						"title":"Permissions",
-						"width":null,
-						"height":null,
-						"collapsible":false,
-						"collapsed":false,
-						"bodyStyle":"",
-						"datatype":"layout",
-						"permissions":null,
-						"childs":[
-
 						],
 						"locked":false
 					},
