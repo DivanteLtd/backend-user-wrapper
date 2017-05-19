@@ -3,40 +3,30 @@
 		<plugin>
 
             <!-- the plugin name [A-Za-z_] -->
-            <pluginName>UserPermissions</pluginName>
+            <pluginName>BackendUserWrapper</pluginName>
 
             <!-- a short description -->
 			<pluginDescription><![CDATA[Allows creation of User accounts in object tree with additional permissions]]></pluginDescription>
 
             <!-- meta data -->
-            <pluginVersion>1.0</pluginVersion>
-            <pluginRevision>1</pluginRevision>
+            <pluginVersion>1.1.1</pluginVersion>
+            <pluginRevision>3</pluginRevision>
             <pluginBuildTimestamp>0</pluginBuildTimestamp>
 
-            <!-- put in the URL for the plugin configuration eg. /plugin/UserPermissions/admin/index -->
-            <pluginIframeSrc>/plugin/UserPermissions/admin/index</pluginIframeSrc>
+            <!-- put in the URL for the plugin configuration eg. /pluBackendUserWrapperions/admin/index -->
+            <pluginIframeSrc>/plugin/BackendUserWrapper/admin/index</pluginIframeSrc>
 
             <!-- className of the plugin which extends Pimcore_API_Plugin_Abstract-->
-			<pluginClassName>\UserPermissions\Plugin</pluginClassName>
+			<pluginClassName>\BackendUserWrapper\Plugin</pluginClassName>
 
             <!-- include paths relative to plugin-directory -->
 			<pluginIncludePaths>
-				<path>/UserPermissions/lib</path>
+				<path>/BackendUserWrapper/lib</path>
 			</pluginIncludePaths>
 
 			<!-- namespaces to register with autoloader-->
 			<pluginNamespaces>
-				<namespace>UserPermissions</namespace>
+				<namespace>BackendUserWrapper</namespace>
 			</pluginNamespaces>
-
-			<!-- js files with path relative to plugin-directory -->
-			<pluginJsPaths>
-                <path>/plugins/UserPermissions/static/js/startup.js</path>
-			</pluginJsPaths>
-
-			<!-- css files with path relative to plugin-directory -->
-			<pluginCssPaths>
-                <path>/plugins/UserPermissions/static/css/example.css</path>
-			</pluginCssPaths>
 		</plugin>
 </zend-config>

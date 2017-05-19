@@ -1,23 +1,24 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: jplaskonka
- * Date: 10.05.17
- * Time: 15:12
+ * @category    BackendUserWrapper
+ * @date        19/05/2017 14:31
+ * @author      Jakub Płaskonka <jplaskonka@divante.pl>
+ * @copyright   Copyright (c) 2017 Divante Ltd. (https://divante.co)
  */
 
-namespace UserPermissions\User;
+namespace BackendUserWrapper\User;
 
 use Pimcore\Model\User;
 
 /**
  * Class Manager
- * @package UserPermissions\User
+ *
+ * @package BackendUserWrapper\User
  */
 class Manager
 {
     /**
-     * @param \Pimcore\Model\Object\User $userObject
+     * @param \Pimcore\Model\Object\BackendUser $userObject
      */
     public static function processUser($userObject)
     {
@@ -30,21 +31,15 @@ class Manager
     }
 
     /**
-     * @param \Pimcore\Model\Object\User $userObject
+     * @param \Pimcore\Model\Object\BackendUser $userObject
      */
     protected static function createUser($userObject)
     {
-        if ($userObject->isPublished()) {
-            $active = true;
-        } else {
-            $active = false;
-        }
-
         $user = User::create([
             "parentId" => 0,
             "name" => trim($userObject->getUsername()),
             "password" => "",
-            "active" => $active
+            "active" => $userObject->isPublished()
         ]);
 
         $userObject->setUser($user->getId());
@@ -53,21 +48,13 @@ class Manager
     }
 
     /**
-     * @param \Pimcore\Model\Object\User $userObject
-     * @param \Pimcore\Model\User $user
+     * @param \Pimcore\Model\Object\BackendUser $userObject
+     * @param User $user
      */
     protected static function updateUser($userObject, User $user)
     {
-        if ($userObject->isPublished()) {
-            $active = true;
-        } else {
-            $active = false;
-        }
-
-        $user->setActive($active);
-
+        $user->setActive($userObject->isPublished());
         $user->setName($userObject->getUsername());
-        $user->setPassword($userObject->getPassword());
         $user->setEmail($userObject->getEmail());
         $user->setFirstname($userObject->getFirstname());
         $user->setLastname($userObject->getLastname());
@@ -87,8 +74,7 @@ class Manager
     }
 
     /**
-     * @param \Pimcore\Model\Object\User $userObject
-     * @param \Pimcore\Model\User $user
+     * @param \Pimcore\Model\Object\BackendUser $userObject
      */
     public static function deleteUser($userObject)
     {

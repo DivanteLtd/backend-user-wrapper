@@ -1,6 +1,6 @@
 {
-    "name": "divante-ltd/user-permissions",
-    "description": "Extended User Permissions plugin for Pimcore",
+    "name": "divante-ltd/backend-user-wrapper",
+    "description": "Pimcore's User wrapper into Objects",
     "type": "pimcore-plugin",
     "license": "GPL-3.0+",
     "require": {

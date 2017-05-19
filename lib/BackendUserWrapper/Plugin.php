@@ -1,17 +1,24 @@
 <?php
+/**
+ * @category    BackendUserWrapper
+ * @date        19/05/2017 14:31
+ * @author      Jakub Płaskonka <jplaskonka@divante.pl>
+ * @copyright   Copyright (c) 2017 Divante Ltd. (https://divante.co)
+ */
 
-namespace UserPermissions;
+namespace BackendUserWrapper;
 
 use Pimcore\API\Plugin as PluginLib;
 use Pimcore\Model\Object\ClassDefinition\Service;
 use Pimcore\Model\User\Role;
-use UserPermissions\Helper\Config;
-use UserPermissions\Helper\User;
-use UserPermissions\User\Manager;
+use BackendUserWrapper\Helper\Config;
+use BackendUserWrapper\Helper\User;
+use BackendUserWrapper\Helper\UserHelper;
+use BackendUserWrapper\User\Manager;
 
 /**
  * Class Plugin
- * @package UserPermissions
+ * @package BackendUserWrapper
  */
 class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterface
 {
@@ -31,7 +38,7 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
     public function handleObject($event)
     {
         $object = $event->getTarget();
-        $configHelper = new \UserPermissions\Helper\Config();
+        $configHelper = new \BackendUserWrapper\Helper\Config();
         if ($object->getClassName() == $configHelper->getConfig()->className) {
             Manager::processUser($object);
         }
@@ -43,7 +50,7 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
     public function deleteObject($event)
     {
         $object = $event->getTarget();
-        $configHelper = new \UserPermissions\Helper\Config();
+        $configHelper = new \BackendUserWrapper\Helper\Config();
         if ($object->getClassName() == $configHelper->getConfig()->className) {
             Manager::deleteUser($object);
         }
@@ -69,13 +76,13 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
                 "name" => $config->className
             ));
 
-            $classFile = file_get_contents(PIMCORE_PLUGINS_PATH . "/UserPermissions/user.json");
-            $rolesString = User::getRolesString();
+            $classFile = file_get_contents(PIMCORE_PLUGINS_PATH . "/BackendUserWrapper/user.json");
+            $rolesString = UserHelper::getRolesString();
             $classFile = str_replace("<<ROLESSTRING>>", $rolesString, $classFile);
             Service::importClassDefinitionFromJson($class, $classFile);
         }
 
-        return true;
+        return "BackendUser plugin has been installed.";
     }
 
     /**
@@ -91,7 +98,7 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
             return false;
         } else {
             $class->delete();
-            return true;
+            return "BackendUser Plugin has been uninstalled.";
         }
     }
 

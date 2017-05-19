@@ -1,19 +1,19 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: jplaskonka
- * Date: 18.05.17
- * Time: 15:09
+ * @category    BackendUserWrapper
+ * @date        19/05/2017 14:31
+ * @author      Jakub Płaskonka <jplaskonka@divante.pl>
+ * @copyright   Copyright (c) 2017 Divante Ltd. (https://divante.co)
  */
 
-namespace UserPermissions\Helper;
+namespace BackendUserWrapper\Helper;
 
 /**
  * Class User
  * Helper providing User model functions
- * @package UserPermissions\Helper
+ * @package BackendUserWrapper\Helper
  */
-class User
+class UserHelper
 {
     /**
      * Gets Pimcore's roles as a json_encoded string

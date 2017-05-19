@@ -1,3 +1,11 @@
+<?php
+/**
+ * @category    BackendUserWrapper
+ * @date        19/05/2017 14:31
+ * @author      Jakub Płaskonka <jplaskonka@divante.pl>
+ * @copyright   Copyright (c) 2017 Divante Ltd. (https://divante.co)
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +14,8 @@
   <meta name="author" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/plugins/UserPermissions/static/css/normalize.css">
-  <link rel="stylesheet" href="/plugins/UserPermissions/static/css/skeleton.css">
+  <link rel="stylesheet" href="/plugins/BackendUserWrapper/static/css/normalize.css">
+  <link rel="stylesheet" href="/plugins/BackendUserWrapper/static/css/skeleton.css">
 </head>
 <body>
 
@@ -21,7 +29,7 @@
           <div class="row">
             <div class="six columns">
               <label for="className"><?=$this->t("user_class_name");?></label>
-              <input class="u-full-width" type="text" placeholder="User" id="className" name="className" value="<?=$this->className?>">
+              <input class="u-full-width" type="text" placeholder="BackendUser" id="className" name="className" value="<?=$this->className?>">
             </div>
           </div>
 
