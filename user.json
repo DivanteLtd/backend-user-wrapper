@@ -131,7 +131,7 @@
 								"name":"email",
 								"title":"Email",
 								"tooltip":"",
-								"mandatory":false,
+								"mandatory":true,
 								"noteditable":false,
 								"index":false,
 								"locked":false,

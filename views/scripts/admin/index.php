@@ -25,16 +25,28 @@
     <div class="row">
       <div class="one-half column" style="margin-top: 10%">
         <h4><?=$this->t("user_permissions_config");?></h4>
+          <?php if($this->saved): ?>
+              <?=$this->t("configuration_has_been_saved");?>
+          <?php elseif ($this->reload): ?>
+              <?=$this->t("roles_has_been_reloaded");?>
+          <?php endif; ?>
         <form action="#" method="post">
           <div class="row">
             <div class="six columns">
               <label for="className"><?=$this->t("user_class_name");?></label>
               <input class="u-full-width" type="text" placeholder="BackendUser" id="className" name="className" value="<?=$this->className?>">
+              <label for="adminUrl"><?=$this->t("admin_url_info");?></label>
+                <?php $currentUrl = $this->getRequest()->getScheme() . "://" . $this->getRequest()->getHttpHost(); ?>
+              <input class="u-full-width" type="text" placeholder="<?=$currentUrl?>" id="adminUrl" name="adminUrl" value="<?php if($this->adminUrl) echo $this->adminUrl; else echo $currentUrl?>">
             </div>
           </div>
 
           <input class="button-primary" type="submit" value="<?=$this->t("save");?>">
+
         </form>
+          <label for="reload_roles"><?=$this->t("reload_roles_info");?></label>
+          <input class="button" id="reload_roles" type="button" value="<?=$this->t("reload_roles");?>"
+          onclick="document.location.href = '/plugin/BackendUserWrapper/admin/reload-roles';">
       </div>
     </div>
   </div>

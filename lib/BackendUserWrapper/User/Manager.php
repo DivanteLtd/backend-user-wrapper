@@ -8,7 +8,11 @@
 
 namespace BackendUserWrapper\User;
 
+use BackendUserWrapper\Helper\Config;
 use Pimcore\Model\User;
+use Pimcore\Tool;
+use Pimcore\Tool\Authentication;
+use Pimcore\Translate;
 
 /**
  * Class Manager
@@ -41,10 +45,21 @@ class Manager
             "password" => "",
             "active" => $userObject->isPublished()
         ]);
-
         $userObject->setUser($user->getId());
         $userObject->save();
+
         self::updateUser($userObject, $user);
+
+        $configHelper = new Config();
+        $uri = $configHelper->getConfig()->adminUrl;
+        $token = Authentication::generateToken(trim($userObject->getUsername()), $user->getPassword());
+        $loginUrl = $uri . "/admin/login/login/?username=" . trim($userObject->getUsername()) . "&token=" . $token . "&reset=true";
+
+        $t = new \Zend_View_Helper_Translate();
+        $mail = Tool::getMail([$user->getEmail()], $t->translate("account_creation_subject"));
+        $mail->setIgnoreDebugMode(true);
+        $mail->setBodyText($t->translate("account_creation_message")."\r\n\r\n" . $loginUrl);
+        $mail->send();
     }
 
     /**
