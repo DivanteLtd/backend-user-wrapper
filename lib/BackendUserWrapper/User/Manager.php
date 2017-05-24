@@ -42,7 +42,7 @@ class Manager
         $user = User::create([
             "parentId" => 0,
             "name" => trim($userObject->getUsername()),
-            "password" => "",
+            "password" => uniqid(),
             "active" => $userObject->isPublished()
         ]);
         $userObject->setUser($user->getId());
