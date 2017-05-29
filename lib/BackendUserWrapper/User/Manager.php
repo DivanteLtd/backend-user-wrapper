@@ -58,13 +58,13 @@ class Manager
         $t = new \Zend_View_Helper_Translate();
         $mail = Tool::getMail([$user->getEmail()], $t->translate("account_creation_subject"));
         $mail->setIgnoreDebugMode(true);
-        $mail->setBodyText($t->translate("account_creation_message")."\r\n\r\n" . $loginUrl);
+        $mail->setBodyText($t->translate("account_creation_message") . "\r\n\r\n" . $loginUrl);
         $mail->send();
     }
 
     /**
      * @param \Pimcore\Model\Object\BackendUser $userObject
-     * @param User $user
+     * @param User                              $user
      */
     protected static function updateUser($userObject, User $user)
     {
@@ -94,6 +94,8 @@ class Manager
     public static function deleteUser($userObject)
     {
         $user = User::getByName($userObject->getUsername());
-        $user->delete();
+        if ($user) {
+            $user->delete();
+        }
     }
 }
