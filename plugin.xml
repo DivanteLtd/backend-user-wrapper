@@ -9,8 +9,8 @@
 			<pluginDescription><![CDATA[Allows creation of User accounts in object tree with additional permissions]]></pluginDescription>
 
             <!-- meta data -->
-            <pluginVersion>1.2.1</pluginVersion>
-            <pluginRevision>5</pluginRevision>
+            <pluginVersion>1.3.0</pluginVersion>
+            <pluginRevision>6</pluginRevision>
             <pluginBuildTimestamp>0</pluginBuildTimestamp>
 
             <!-- put in the URL for the plugin configuration eg. /pluBackendUserWrapperions/admin/index -->

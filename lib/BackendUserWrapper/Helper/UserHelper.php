@@ -25,16 +25,51 @@ class UserHelper
         $list->setCondition("`type` = ?", ["role"]);
         $list->load();
 
+        $json = '{
+            "fieldtype":"checkbox",
+            "defaultValue":0,
+            "queryColumnType":"tinyint(1)",
+            "columnType":"tinyint(1)",
+            "phpdocType":"boolean",
+            "name":"chkbxname",
+            "title":"chkbxname",
+            "tooltip":"",
+            "mandatory":false,
+            "noteditable":false,
+            "index":false,
+            "locked":false,
+            "style":"",
+            "permissions":null,
+            "datatype":"data",
+            "relationType":false,
+            "invisible":false,
+            "visibleGridView":false,
+            "visibleSearch":false
+        }';
+
         $roles = [];
         if (is_array($list->getItems())) {
             foreach ($list->getItems() as $item) {
-                $role = new \stdClass();
-                $role->key = $item->getName();
-                $role->value = $item->getName();
+                $role = json_decode ($json);
+                $role->name = $item->getName();
+                $role->title = $item->getName();
                 $roles[] = $role;
             }
         }
 
         return json_encode($roles);
     }
+
+    /**
+     * @return \Pimcore\Model\User\Role\Listing
+     */
+    public static function getRoles()
+    {
+        $list = new \Pimcore\Model\User\Role\Listing();
+        $list->setCondition("`type` = ?", ["role"]);
+        $list->load();
+
+        return $list;
+    }
+
 }

@@ -9,6 +9,7 @@
 namespace BackendUserWrapper\User;
 
 use BackendUserWrapper\Helper\Config;
+use BackendUserWrapper\Helper\UserHelper;
 use Pimcore\Model\User;
 use Pimcore\Tool;
 use Pimcore\Tool\Authentication;
@@ -74,12 +75,12 @@ class Manager
         $user->setFirstname($userObject->getFirstname());
         $user->setLastname($userObject->getLastname());
 
-        $roles = $userObject->getUserRoles();
+        $roles = UserHelper::getRoles();
 
-        $rolesArray = [];
-        if (is_array($roles)) {
-            foreach ($roles as $rule) {
-                $rolesArray[] = User\Role::getByName($rule)->getId();
+        /** @var User\Role $role */
+        foreach ($roles->getItems() as $role) {
+            if($userObject->{"get".$role->getName()}()) {
+                $rolesArray[] = $role->getId();
             }
         }
 

@@ -131,7 +131,7 @@
 								"name":"email",
 								"title":"Email",
 								"tooltip":"",
-								"mandatory":true,
+								"mandatory":false,
 								"noteditable":false,
 								"index":false,
 								"locked":false,
@@ -145,7 +145,44 @@
 							},
 							{
 								"fieldtype":"user",
-								"options":null,
+								"options":[
+									{
+										"value":"2",
+										"key":"admin"
+									},
+									{
+										"value":"9",
+										"key":"admin1"
+									},
+									{
+										"value":"21",
+										"key":"asdf (asdf asdf)"
+									},
+									{
+										"value":"22",
+										"key":"asdfas (fasfas fasdf)"
+									},
+									{
+										"value":"19",
+										"key":"Ciam (ciam ciam)"
+									},
+									{
+										"value":"20",
+										"key":"Cium (Cium Cium)"
+									},
+									{
+										"value":"11",
+										"key":"contributor1"
+									},
+									{
+										"value":"23",
+										"key":"kek (saf fadsf)"
+									},
+									{
+										"value":"13",
+										"key":"operator1"
+									}
+								],
 								"width":"",
 								"defaultValue":null,
 								"queryColumnType":"varchar(190)",
@@ -184,32 +221,7 @@
 						"bodyStyle":"",
 						"datatype":"layout",
 						"permissions":null,
-						"childs":[
-							{
-								"fieldtype":"multiselect",
-								"options":<<ROLESSTRING>>,
-								"width":"",
-								"height":"",
-								"maxItems":"",
-								"queryColumnType":"text",
-								"columnType":"text",
-								"phpdocType":"array",
-								"name":"userRoles",
-								"title":"User Roles",
-								"tooltip":"",
-								"mandatory":false,
-								"noteditable":false,
-								"index":false,
-								"locked":false,
-								"style":"",
-								"permissions":null,
-								"datatype":"data",
-								"relationType":false,
-								"invisible":false,
-								"visibleGridView":false,
-								"visibleSearch":false
-							}
-						],
+						"childs": <<ROLESSTRING>>,
 						"locked":false
 					}
 				],
